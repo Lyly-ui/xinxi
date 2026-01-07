@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字媒体技术专业教程</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4CAF50;
+            --warning: #ff9800;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        /* 导航样式 */
+        nav {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 主内容区 */
+        main {
+            display: flex;
+            margin: 2rem 0;
+            gap: 2rem;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            flex: 0 0 280px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .module-list {
+            list-style: none;
+        }
+        
+        .module-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .module-list a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .module-list a:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .module-list a.active {
+            background-color: #e7f0ff;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .module-list i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* 内容区 */
+        .content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .content-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 65%;
+            border-radius: 4px;
+        }
+        
+        /* 教程卡片 */
+        .tutorial-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title i {
+            background-color: #e7f0ff;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .card-content {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .level {
+            padding: 0.3rem 0.8rem;
+            background-color: #e7f0ff;
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* 示例区域 */
+        .example-area {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .example-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .code-comment {
+            color: #6A9955;
+        }
+        
+        .code-keyword {
+            color: #569CD6;
+        }
+        
+        .code-string {
+            color: #CE9178;
+        }
+        
+        .code-function {
+            color: #DCDCAA;
+        }
+        
+        /* 可视化示例 */
+        .visual-example {
+            height: 200px;
+            background: linear-gradient(135deg, #4361ee, #4cc9f0);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pixel-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 2px;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .pixel {
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: background-color 0.3s;
+        }
+        
+        .pixel.active {
+            background-color: white;
+        }
+        
+        .color-mixer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .color-slider {
+            flex: 1;
+            margin: 0 1rem;
+        }
+        
+        .color-slider label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .color-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background-color: #4361ee;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            main {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .color-mixer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .color-slider {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-desktop"></i>
+                <div>
+                    <h1>数字媒体技术专业教程</h1>
+                    <p>数字创意 · 交互设计 · 媒体技术 · 视觉艺术</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <p><i class="fas fa-book-open"></i> 8个核心模块</p>
+                <p><i class="fas fa-clock"></i> 120+课时</p>
+                <p><i class="fas fa-certificate"></i> 实践项目驱动</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 导航 -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#">课程大纲</a></li>
+                <li><a href="#">实践项目</a></li>
+                <li><a href="#">资源下载</a></li>
+                <li><a href="#">社区讨论</a></li>
+                <li><a href="#">关于我们</a></li>
+            </ul>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 主内容区 -->
+    <div class="container">
+        <main>
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <h3><i class="fas fa-th-list"></i> 教程模块</h3>
+                <ul class="module-list">
+                    <li><a href="#" class="active"><i class="fas fa-paint-brush"></i> 图形设计基础</a></li>
+                    <li><a href="#"><i class="fas fa-play-circle"></i> 动画原理与技术</a></li>
+                    <li><a href="#"><i class="fas fa-code"></i> 交互式媒体开发</a></li>
+                    <li><a href="#"><i class="fas fa-video"></i> 数字视频制作</a></li>
+                    <li><a href="#"><i class="fas fa-gamepad"></i> 游戏设计与开发</a></li>
+                    <li><a href="#"><i class="fas fa-mobile-alt"></i> 移动媒体应用</a></li>
+                    <li><a href="#"><i class="fas fa-cube"></i> 三维建模与渲染</a></li>
+                    <li><a href="#"><i class="fas fa-project-diagram"></i> 媒体项目管理</a></li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;"><i class="fas fa-chart-line"></i> 学习进度</h3>
+                <div class="progress" style="margin-top: 1rem;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>65% 已完成</span>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1rem; background-color: #e7f0ff; border-radius: 8px;">
+                    <h4><i class="fas fa-lightbulb"></i> 学习提示</h4>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">数字媒体技术是交叉学科，建议理论学习与实践操作相结合，多尝试创作自己的作品。</p>
+                </div>
+            </aside>
+            
+            <!-- 内容区 -->
+            <div class="content">
+                <div class="content-header">
+                    <h2>图形设计基础</h2>
+                    <div class="progress">
+                        <span>本模块进度: 80%</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-section">
+                    <div class="section-title">
+                        <i class="fas fa-palette"></i>
+                        <h3>颜色理论与应用</h3>
+                    </div>
+                    
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-circle"></i>
+                                <h4>色彩模型</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>数字媒体中常用的色彩模型包括RGB（加色模型）、CMYK（减色模型）和HSV/HSL（色调、饱和度、亮度）。了解不同模型的应用场景是数字媒体设计的基础。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">初级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-adjust"></i>
+                                <h4>对比度与可读性</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>合理的对比度设计可以提升内容的可读性和视觉层次。WCAG 2.1标准建议文本与背景的对比度至少达到4.5:1，大文本至少3:1。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">中级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-layer-group"></i>
+                                <h4>配色方案</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>常见的配色方案包括单色、类比色、互补色、分裂互补色和三色组合。选择恰当的配色方案可以传达不同的情感和信息。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">初级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-section">
+                    <div class="section-title">
+                        <i class="fas fa-vector-square"></i>
+                        <h3>图形与排版</h3>
+                    </div>
+                    
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-shapes"></i>
+                                <h4>矢量与位图</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>矢量图形由数学公式定义，可无限放大不失真；位图由像素组成，适合照片等复杂图像。了解两者的区别和适用场景是数字媒体设计的关键。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">初级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-font"></i>
+                                <h4>字体与排版</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>字体选择、行高、字间距、段落间距等排版要素直接影响内容的可读性和视觉美感。掌握排版原则是数字媒体设计的基本功。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">中级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-title">
+                                <i class="fas fa-th"></i>
+                                <h4>网格系统</h4>
+                            </div>
+                            <div class="card-content">
+                                <p>网格系统为设计提供结构和一致性，帮助创建平衡、和谐的布局。在网页设计和UI设计中，网格系统尤为重要。</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="level">中级</span>
+                                <button class="btn">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 示例区域 -->
+                <div class="example-area">
+                    <div class="example-header">
+                        <h3>交互式示例</h3>
+                        <p>动手实践，加深理解</p>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab active" data-tab="color-mixer">颜色混合器</button>
+                        <button class="tab" data-tab="pixel-grid">像素网格</button>
+                        <button class="tab" data-tab="code-example">代码示例</button>
+                    </div>
+                    
+                    <div id="color-mixer" class="tab-content active">
+                        <p>使用下面的滑块调整RGB值，观察颜色变化：</p>
+                        
+                        <div class="visual-example">
+                            <div class="color-preview" id="colorPreview"></div>
+                        </div>
+                        
+                        <div class="color-mixer">
+                            <div class="color-slider">
+                                <label for="redSlider">红色 (R): <span id="redValue">102</span></label>
+                                <input type="range" id="redSlider" min="0" max="255" value="102" class="slider">
+                            </div>
+                            
+                            <div class="color-slider">
+                                <label for="greenSlider">绿色 (G): <span id="greenValue">97</span></label>
+                                <input type="range" id="greenSlider" min="0" max="255" value="97" class="slider">
+                            </div>
+                            
+                            <div class="color-slider">
+                                <label for="blueSlider">蓝色 (B): <span id="blueValue">238</span></label>
+                                <input type="range" id="blueSlider" min="0" max="255" value="238" class="slider">
+                            </div>
+                        </div>
+                        
+                        <p style="margin-top: 1rem;">当前RGB值: <span id="rgbValue">rgb(102, 97, 238)</span> | 十六进制: <span id="hexValue">#6661ee</span></p>
+                    </div>
+                    
+                    <div id="pixel-grid" class="tab-content">
+                        <p>点击像素切换其状态，模拟数字图像编辑：</p>
+                        
+                        <div class="visual-example">
+                            <div class="pixel-grid" id="pixelGrid"></div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <button id="clearBtn" class="btn" style="margin-right: 10px;">清除画布</button>
+                            <button id="invertBtn" class="btn">反色效果</button>
+                        </div>
+                    </div>
+                    
+                    <div id="code-example" class="tab-content">
+                        <p>使用CSS创建简单动画的示例：</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">/* 定义关键帧动画 */</span><br>
+                            <span class="code-keyword">@keyframes</span> <span class="code-function">fadeInScale</span> {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">0%</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;opacity: <span class="code-string">0</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;transform: <span class="code-function">scale</span>(<span class="code-string">0.8</span>);<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-keyword">100%</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;opacity: <span class="code-string">1</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;transform: <span class="code-function">scale</span>(<span class="code-string">1</span>);<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* 应用动画到元素 */</span><br>
+                            <span class="code-function">.animated-element</span> {<br>
+                            &nbsp;&nbsp;animation: <span class="code-string">fadeInScale</span> <span class="code-string">0.5s</span> ease-out forwards;<br>
+                            &nbsp;&nbsp;animation-delay: <span class="code-string">0.2s</span>;<br>
+                            }
+                        </div>
+                        
+                        <p>这个示例展示了CSS关键帧动画的基本用法，这是数字媒体中创建流畅界面动画的常用技术。</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>数字媒体技术</h3>
+                    <p>数字媒体技术专业涵盖计算机科学、艺术设计和传媒领域的交叉知识，培养能够从事数字媒体设计、开发、管理的复合型人才。</p>
+                    <div style="margin-top: 1rem;">
+                        <i class="fab fa-github" style="margin-right: 15px; font-size: 1.2rem;"></i>
+                        <i class="fab fa-codepen" style="margin-right: 15px; font-size: 1.2rem;"></i>
+                        <i class="fab fa-figma" style="font-size: 1.2rem;"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>核心课程</h3>
+                    <ul>
+                        <li><a href="#">数字图像处理</a></li>
+                        <li><a href="#">计算机图形学</a></li>
+                        <li><a href="#">交互设计原理</a></li>
+                        <li><a href="#">三维动画技术</a></li>
+                        <li><a href="#">虚拟现实应用</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>职业方向</h3>
+                    <ul>
+                        <li><a href="#">UI/UX设计师</a></li>
+                        <li><a href="#">前端开发工程师</a></li>
+                        <li><a href="#">动画设计师</a></li>
+                        <li><a href="#">多媒体制作</a></li>
+                        <li><a href="#">游戏开发</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@digitalmedia.edu</li>
+                        <li><i class="fas fa-phone"></i> (010) 1234-5678</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区学院路</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 数字媒体技术专业教程. 本教程仅供学习参考，部分内容来源于网络资源。</p>
+                <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for digital media learners</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端导航切换
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // 标签页切换
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // 移除所有标签和内容的active类
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // 添加当前标签和内容的active类
+                tab.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // 颜色混合器功能
+        const redSlider = document.getElementById('redSlider');
+        const greenSlider = document.getElementById('greenSlider');
+        const blueSlider = document.getElementById('blueSlider');
+        const redValue = document.getElementById('redValue');
+        const greenValue = document.getElementById('greenValue');
+        const blueValue = document.getElementById('blueValue');
+        const rgbValue = document.getElementById('rgbValue');
+        const hexValue = document.getElementById('hexValue');
+        const colorPreview = document.getElementById('colorPreview');
+        
+        function updateColor() {
+            const r = parseInt(redSlider.value);
+            const g = parseInt(greenSlider.value);
+            const b = parseInt(blueSlider.value);
+            
+            // 更新显示值
+            redValue.textContent = r;
+            greenValue.textContent = g;
+            blueValue.textContent = b;
+            
+            // 更新颜色预览
+            const rgbColor = `rgb(${r}, ${g}, ${b})`;
+            colorPreview.style.backgroundColor = rgbColor;
+            
+            // 更新显示的文字
+            rgbValue.textContent = rgbColor;
+            
+            // 转换为十六进制
+            const hexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+            hexValue.textContent = hexColor;
+        }
+        
+        // 为滑块添加事件监听
+        redSlider.addEventListener('input', updateColor);
+        greenSlider.addEventListener('input', updateColor);
+        blueSlider.addEventListener('input', updateColor);
+        
+        // 初始化颜色
+        updateColor();
+        
+        // 像素网格功能
+        const pixelGrid = document.getElementById('pixelGrid');
+        const clearBtn = document.getElementById('clearBtn');
+        const invertBtn = document.getElementById('invertBtn');
+        
+        // 创建像素网格
+        for (let i = 0; i < 100; i++) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            
+            // 随机激活一些像素
+            if (Math.random() > 0.7) {
+                pixel.classList.add('active');
+            }
+            
+            pixel.addEventListener('click', () => {
+                pixel.classList.toggle('active');
+            });
+            
+            pixelGrid.appendChild(pixel);
+        }
+        
+        // 清除画布
+        clearBtn.addEventListener('click', () => {
+            document.querySelectorAll('.pixel').forEach(pixel => {
+                pixel.classList.remove('active');
+            });
+        });
+        
+        // 反色效果
+        invertBtn.addEventListener('click', () => {
+            document.querySelectorAll('.pixel').forEach(pixel => {
+                pixel.classList.toggle('active');
+            });
+        });
+        
+        // 模块列表交互
+        document.querySelectorAll('.module-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有active类
+                document.querySelectorAll('.module-list a').forEach(a => a.classList.remove('active'));
+                
+                // 添加当前active类
+                this.classList.add('active');
+                
+                // 更新内容区标题
+                const moduleName = this.querySelector('i').nextSibling.textContent.trim();
+                document.querySelector('.content-header h2').textContent = moduleName;
+                
+                // 这里在实际应用中会加载对应的模块内容
+                // 本示例中只更新了标题
+            });
+        });
+        
+        // 卡片按钮交互
+        document.querySelectorAll('.card .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const cardTitle = this.closest('.card').querySelector('.card-title h4').textContent;
+                alert(`开始学习 "${cardTitle}" 章节！`);
+            });
+        });
+    </script>
+</body>
+</html>
